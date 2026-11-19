@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: stealabrainrot-api
+    runtime: python
+    pythonVersion: "3.12"
+    buildCommand: pip install -r requirements.txt
+    startCommand: sh -c "python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: ADMIN_API_KEY
+        generateValue: true
